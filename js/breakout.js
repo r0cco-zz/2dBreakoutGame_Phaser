@@ -13,6 +13,9 @@ var bricks;
 var newBrick;
 var brickInfo;
 
+var scoreText;
+var score = 0;
+
 function preload() {
 	game.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
 	game.scale.pageAlignHorizontally = true;
@@ -41,6 +44,7 @@ function create() {
 	game.physics.enable(paddle, Phaser.Physics.ARCADE);
 	paddle.body.immovable = true;
 	initBricks();
+	scoreText = game.add.text(5, 5, 'Points: 0', { font: '18px Arial', fill: '#0095DD' });
 }
 
 function update() {
@@ -81,5 +85,7 @@ function initBricks() {
 }
 
 function ballHitBrick(ball, brick) {
-    brick.kill();
+	brick.kill();
+	score += 10;
+    scoreText.setText('Points: '+score);
 }
